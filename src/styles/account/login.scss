@@ -1,0 +1,22 @@
+.account{
+  width: 100vw;
+  height: 100vh;
+  background-color: lightslategrey;
+  display: flex;
+  align-items: center;
+  .form-wrap {
+    width: 285px;
+    margin: auto;
+    color: #fff;
+    label {
+      display: block;
+      text-align: left;
+      font-size: 14px;
+      color: #fff;
+    }
+  };
+  .ant-col.ant-form-item-control-wrapper{
+    width: 285px;
+  }
+}
+
