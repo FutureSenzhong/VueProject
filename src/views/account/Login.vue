@@ -16,6 +16,10 @@
         </a-form-item>
 
         <a-form-item>
+          <captcha />
+        </a-form-item>
+
+        <a-form-item>
           <a-button type="primary" html-type="submit" block>
             登录
           </a-button>
@@ -31,9 +35,13 @@
 
 <script>
 // @ is an alias to /src
-import { reactive } from "vue";
+import { reactive, onMounted, toRefs } from "vue";
+// 局部组件导入
+import Captcha from "../../components/captcha";
+
 export default {
   name: "Login",
+  components: { Captcha },
   setup(props) {
     const formConfig = reactive({
       layout: {
@@ -41,8 +49,14 @@ export default {
         wrapperCol: { span: 14 }
       }
     });
+    const data = toRefs(formConfig)
+    //生命周期函数，挂摘完成之后
+    onMounted(()=>{
+
+    })
     return {
-      formConfig
+      // formConfig
+      ...data
     };
   }
 };
