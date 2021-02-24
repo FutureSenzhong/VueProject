@@ -16,14 +16,17 @@
         </a-form-item>
 
         <a-form-item>
+          <label>&nbsp</label>
           <captcha />
+          <label style="margin: 1px, 0, 3px, 0">&nbsp</label>
         </a-form-item>
 
         <a-form-item>
-          <a-button type="primary" html-type="submit" block>
-            登录
-          </a-button>
+            <a-button type="primary" html-type="submit" block>
+              登录
+            </a-button>
         </a-form-item>
+
       </a-form>
       <div class="text-center fs-12">
         <a href="" class="color-white">忘记密码</a> |

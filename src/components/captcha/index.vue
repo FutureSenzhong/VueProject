@@ -1,14 +1,15 @@
 <template>
-  <div id="nc" class="nc-container captcha-1"></div>
+  <div id="nc" className="nc-container"></div>
 </template>
 
 <script>
-import { onMounted } from "vue"
+import {onMounted} from "vue"
 import "./awsc";
+
 export default {
   name: "Captcha",
-  setup(){
-    onMounted(()=>{
+  setup() {
+    onMounted(() => {
       // 实例化nc
       AWSC.use("nc", function (state, module) {
         // 初始化
@@ -41,13 +42,7 @@ export default {
 }
 
 
-
-
-
-
 </script>
-
-
 
 
 <style lang="scss" scoped>
@@ -56,7 +51,7 @@ export default {
 
 <style lang="scss">
 // 全局样式
-.nc-container #nc_1_wrapper {width: 285px !important; }
-.captcha-1 {margin-bottom: 10px !important; margin-top: 20px !important;}
-
+.nc-container #nc_1_wrapper {
+  width: 285px !important;
+}
 </style>
