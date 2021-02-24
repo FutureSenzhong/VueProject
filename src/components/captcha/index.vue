@@ -51,7 +51,7 @@ export default {
 
 <style lang="scss">
 // 全局样式
-.nc-container #nc_1_wrapper {
-  width: 285px !important;
-}
+//.nc-container #nc_1_wrapper {
+//  width: 285px !important;
+//}
 </style>

@@ -16,7 +16,6 @@
         </a-form-item>
 
         <a-form-item>
-          <label>&nbsp</label>
           <captcha />
           <label style="margin: 1px, 0, 3px, 0">&nbsp</label>
         </a-form-item>
