@@ -25,7 +25,7 @@
 
         <a-form-item name="code">
           <label>验证码</label>
-          <a-row>
+          <a-row :gutter="16">
             <a-col :span="14">
               <a-input v-model:value="account_form.code" type="password" autocomplete="off"></a-input>
             </a-col>
@@ -62,7 +62,7 @@ import { reactive, onMounted, toRefs } from "vue";
 // 局部组件导入
 import Captcha from "../../components/captcha";
 //导入外部方法
-import { checkPhone } from "@/utils/verification";
+import { Phone, Pwd } from "@/utils/verification";
 
 export default {
   name: "Login",
@@ -73,8 +73,50 @@ export default {
       console.log(value);
       if(!value){
         return Promise.reject("账号必填")
-      } else if (!checkPhone(value)) {
+      } else if (!Phone(value)) {
+        console.log("phone", !Phone(value))
         return Promise.reject("请输入11位手机号")
+      } else {
+        return Promise.resolve()
+      }
+    };
+
+    const  checkPassword = async (rule, value, callback) => {
+      if(!value){
+        return Promise.reject("密码必填")
+      } else if (!Pwd(value)) {
+        console.log("pwd", !Pwd(value))
+        return Promise.reject("密码必须包含6-16个字符" +
+            "，1个数字\n" +
+            "，2个小写字母\n" +
+            "，2个大写字母\n" +
+            "，1个特殊字符")
+      } else {
+        return Promise.resolve()
+      }
+    };
+
+    const  checkPasswords = async (rule, value, callback) => {
+      const password = formConfig.account_form.password
+      if(!value){
+        return Promise.reject("确认密码必填")
+      } else if (!Pwd(value)) {
+        console.log("pwds", !Pwd(value))
+        return Promise.reject("密码必须包含6-16个字符" +
+            "，1个数字\n" +
+            "，2个小写字母\n" +
+            "，2个大写字母\n" +
+            "，1个特殊字符")
+      } else if (value && (password !== value)) {
+        return Promise.reject("两次密码不一致")
+      } else {
+        return Promise.resolve()
+      }
+    };
+
+    const  checkCode = async (rule, value, callback) => {
+      if(!value){
+        return Promise.reject("请输入验证码")
       } else {
         return Promise.resolve()
       }
@@ -93,9 +135,9 @@ export default {
       },
       rules_form: {
         username: [{validator: checkUsername, trigger: "change"}],
-        password: [],
-        passwords: [],
-        code: []
+        password: [{validator: checkPassword, trigger: "change"}],
+        passwords: [{validator: checkPasswords, trigger: "change"}],
+        code: [{validator: checkCode, trigger: "change"}]
       }
     });
     const data = toRefs(formConfig)
@@ -119,4 +161,10 @@ export default {
 </script>
 <style lang="sass">
 @import "./src/styles/account/login.scss"
+</style>
+
+<style lang="scss">
+.ant-form-explain, .ant-form-extra {
+  text-align: left;
+}
 </style>
