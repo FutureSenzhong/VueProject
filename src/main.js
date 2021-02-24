@@ -4,21 +4,14 @@ import router from "./router";
 import store from "./store";
 
 import Antd from "ant-design-vue";
-import { createI18n } from "vue-i18n";
 import "ant-design-vue/dist/antd.css";
 
-//国际化配置
-const i18n = createI18n({
-    locale: "zh",
-    messages: {
-        zh: require("./language/zh"),
-        en: require("./language/en"),
-    }
-})
+import VueI18n from "./language/index";
+
 
 createApp(App)
   .use(store)
   .use(router)
   .use(Antd)
-  .use(i18n)
+  .use(VueI18n)
   .mount("#app");

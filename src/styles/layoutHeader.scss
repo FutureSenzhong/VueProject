@@ -1,7 +1,22 @@
 .ant-layout-header .header-menu {
   float: right;
   margin-right: 20px;
-  .menu-item{
 
+}
+
+.menu-item{
+  padding: 0 20px;
+  font-size: 14px;
+  font-family: "文泉驿微米黑";
+  color: #333333;
+}
+
+.menu-lang{
+  color: #aeaeae;
+  span {
+    margin-right: 10px;
+  }
+  .current {
+    color: #333333;
   }
 }
