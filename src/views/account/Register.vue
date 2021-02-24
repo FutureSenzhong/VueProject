@@ -30,7 +30,14 @@
               <a-input v-model:value="account_form.code" type="password" autocomplete="off"></a-input>
             </a-col>
             <a-col :span="10">
-              <a-button type="danger" html-type="submit" block>获取验证码</a-button>
+              <a-button
+                  type="danger"
+                  :disabled="code_button_disabled"
+                  :loading="code_button_loading"
+                  @click="getCode"
+                  block>
+                {{ code_button_text }}
+              </a-button>
             </a-col>
           </a-row>
         </a-form-item>
@@ -58,6 +65,7 @@
 <script>
 // @ is an alias to /src
 import { reactive, onMounted, toRefs } from "vue";
+import { message } from "ant-design-vue";
 // 局部组件导入
 import Captcha from "../../components/captcha";
 //导入外部方法
@@ -121,7 +129,7 @@ export default {
       }
     };
     //定义表单数据
-    const formConfig = reactive({
+    const formConfigData = reactive({
       layout: {
         labelCol: { span: 4 },
         wrapperCol: { span: 14 }
@@ -137,13 +145,51 @@ export default {
         password: [{validator: checkPassword, trigger: "change"}],
         passwords: [{validator: checkPasswords, trigger: "change"}],
         code: [{validator: checkCode, trigger: "change"}]
-      }
+      },
+      code_button_text: "获取验证码",
+      code_button_loading: false,
+      code_button_disabled: false,
+      second: 60,
+      timer: null,
     });
-    const data = toRefs(formConfig)
+    const data = toRefs(formConfigData)
 
     //提交表单的方法
     const handleFinish = () => {
         alert("hello")
+    }
+
+    //获取验证码
+    const getCode = () => {
+      if (!formConfigData.account_form.username) {
+        message.error("请输入账号")
+        return false;
+      }
+      if (!formConfigData.account_form.password) {
+        message.error("请输入密码")
+        return false;
+      }
+      if (!formConfigData.account_form.passwords) {
+        message.error("请输入确认密码")
+        return false;
+      }
+      if(formConfigData.timer !== null) {
+        clearInterval(formConfigData.timer);
+        formConfigData.timer = null;
+      }
+      formConfigData.timer = setInterval(() => {
+        let s = formConfigData.second--;
+        formConfigData.code_button_text = `剩余${s}秒`;
+        // formConfigData.code_button_disabled = true;
+        if (s <= 0) {
+          clearInterval(formConfigData.timer)
+          formConfigData.timer = null;
+          formConfigData.second = 60;
+          formConfigData.code_button_text = "重新获取";
+          // formConfigData.code_button_disabled = false;
+        }
+
+      }, 1000)
     }
     //生命周期函数，挂摘完成之后
     onMounted(()=>{
@@ -153,7 +199,8 @@ export default {
       // formConfig
       ...data,
       // 把方法返回才能调用
-      handleFinish
+      handleFinish,
+      getCode,
     };
   }
 };
