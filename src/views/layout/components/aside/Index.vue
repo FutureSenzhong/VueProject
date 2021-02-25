@@ -42,7 +42,7 @@ export default {
 
     // 数据
     const dataItem = reactive({
-      logo: require("@/assets/index_logo.png"),
+      logo: require("@/assets/logo.png"),
       selectedKeys: localStorage.getItem("selectedKeys") ? [localStorage.getItem("selectedKeys")] :[],
       openKeys: localStorage.getItem("openKeys") ? [localStorage.getItem("openKeys")] :[]
     });
