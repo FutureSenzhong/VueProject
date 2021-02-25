@@ -4,15 +4,19 @@
           <span>{{ menuData.meta && menuData.meta.title }}</span>
     </template>
     <template v-if="menuData.children.length">
-      <a-menu-item
-          :key="child.path"
-          v-for="child in menuData.children">
+      <template v-for="item in menuData.children">
+        <a-menu-item
+            :key="item.path"
+            v-if="!item.children">
 
-        <router-link :to="child.path">
-          {{ child.meta && child.meta.title }}
-        </router-link>
+          <router-link :to="item.path">
+            {{ item.meta && item.meta.title }}
+          </router-link>
 
-      </a-menu-item>
+        </a-menu-item>
+        <Menu v-else :menuData="item" />
+      </template>
+
     </template>
   </a-sub-menu>
 

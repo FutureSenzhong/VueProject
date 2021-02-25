@@ -60,7 +60,27 @@ const routes = [
         meta: {
           title: "角色管理"
         },
-        component: () => import("../views/admin/Role")
+        component: () => import("../views/admin/Role"),
+        children: [
+          {
+            path: "/a",
+            name: "A",
+            meta: {
+              title: "角色管理A"
+            },
+            component: () => import("../views/admin/Role"),
+            children: [
+                {
+                  path: "/aa",
+                  name: "Aa",
+                  meta: {
+                    title: "角色管理AA"
+                  },
+                  component: () => import("../views/admin/Role")
+                }
+            ]
+          }
+        ]
       },
       {
         path: "/user",
@@ -68,7 +88,7 @@ const routes = [
         meta: {
           title: "用户管理"
         },
-        component: () => import("../views/admin/User")
+        component: () => import("../views/admin/User"),
       },
     ]
   }
