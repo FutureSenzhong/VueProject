@@ -5,6 +5,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
+    hidden: true,
     component: () => import("../views/home/Index")
   },
   {
@@ -41,11 +42,8 @@ const routes = [
     meta: {
       title: "首页"
     },
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/layout/Index.vue")
+      import("../views/layout/Index.vue")
   },
   //管理后台 - 管理总台
   {
