@@ -1,6 +1,6 @@
 <template>
   <a-layout id="layout-main">
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
+    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible width="255">
       <LayoutAside />
     </a-layout-sider>
 
@@ -22,19 +22,20 @@
 
 <script>
 import LayoutHeader from "./components/Header"
-import LayoutAside from "./components/Aside"
+import LayoutAside from "./components/aside/Index"
 import LayoutMain from "./components/Main"
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
+import { reactive, onMounted, toRefs } from "vue";
 export default {
   name: "Layout",
-  components: { LayoutHeader, LayoutAside, LayoutMain }
+  components: { LayoutHeader, LayoutAside, LayoutMain },
+  setup(props) {
+      const data = toRefs(reactive({
+
+      }))
+    return {
+        ...data
+    }
+  }
 
 };
 </script>

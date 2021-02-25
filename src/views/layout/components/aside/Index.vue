@@ -1,8 +1,11 @@
 <template>
+  <h1 id="logo">
+    <img id="logo-image" :src="logo" alt="">
+    <span id="logo-span">牛逼后台</span>
+  </h1>
   <a-menu
       mode="inline"
       theme="dark"
-      :inline-collapsed="collapsed"
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       @click="selectMenu"
@@ -16,18 +19,7 @@
         </a-menu-item>
 
         <!-- 二级子菜单 -->
-        <a-sub-menu v-else :key="item.path">
-          <template #title>
-          <span>
-            <span>{{ item.meta && item.meta.title }}</span>
-          </span>
-          </template>
-          <template v-if="item.children.length">
-            <a-menu-item :key="child.path" v-for="child in item.children">
-              <router-link :to="child.path">{{ child.meta && child.meta.title }}</router-link>
-            </a-menu-item>
-          </template>
-        </a-sub-menu>
+        <Menu :menuData="item" v-else />
       </template>
     </template>
   </a-menu>
@@ -36,9 +28,12 @@
 <script>
 import { reactive, toRefs } from "vue";
 import { useRoute, useRouter } from "vue-router";
+// 组件
+import Menu from "./Menu";
 
 export default {
   name: "Aside",
+  components: { Menu },
   setup(props) {
     const { options } = useRouter();
 
@@ -47,6 +42,7 @@ export default {
 
     // 数据
     const dataItem = reactive({
+      logo: require("@/assets/index_logo.png"),
       selectedKeys: localStorage.getItem("selectedKeys") ? [localStorage.getItem("selectedKeys")] :[],
       openKeys: localStorage.getItem("openKeys") ? [localStorage.getItem("openKeys")] :[]
     });
@@ -79,10 +75,4 @@ export default {
 
 
 };
-</script>
-<style lang="scss" >
-</style>
-
-<style lang="scss" scoped>
-
-</style>
+</script>2

@@ -3,7 +3,7 @@
     <div class="header-menu">
       <a-dropdown>
         <a class="ant-dropdown-link" @click.prevent>
-          <img src="../../../assets/logos.jpeg" style="height: 40px;width: 40px;" alt="">
+          <img :src="logo" style="height: 40px;width: 40px;" alt="">
           <DownOutlined />
         </a>
         <template #overlay>
@@ -45,6 +45,7 @@ export default {
 
     //定义表单数据
     const dataItem = reactive({
+      logo: require("@/assets/logos.jpeg"),
       lang: [
           {label: "中文", value: "zh"},
           {label: "English", value: "en"},

@@ -1,0 +1,19 @@
+#logo {
+  display: flex;
+  background-color: black;
+  padding: 24px 0 20px;
+  border-bottom: 2px solid #333333;
+  text-align: center;
+}
+#logo #logo-span {
+  font-size: 30px;
+  align-self: center;
+  margin: 24px 0 24px 0;
+  color: write;
+}
+#logo #logo-image {
+  height: 60px;
+  width: 60px;
+  float:left;
+  margin: 24px 24px 24px 24px;
+}
