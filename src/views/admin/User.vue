@@ -1,11 +1,11 @@
 <template>
-  <router-view></router-view>
+  <h1>user管理</h1>
 </template>
 
 <script>
 
 export default {
-  name: "Main",
+  name: "Role",
 
 };
 </script>
