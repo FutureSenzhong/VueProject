@@ -73,7 +73,5 @@ export default {
       // dataItem
     }
   }
-
-
 };
-</script>2
+</script>
