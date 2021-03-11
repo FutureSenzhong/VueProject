@@ -1,7 +1,7 @@
 <template>
   <h1 id="logo">
     <img id="logo-image" :src="logo" alt="">
-    <span id="logo-span">牛逼后台</span>
+    <span id="logo-span">三木先生</span>
   </h1>
   <a-menu
       mode="inline"
@@ -49,18 +49,19 @@ export default {
 
     const data = toRefs(dataItem);
     // 选择菜单
-    const selectMenu = ({item, key, keyPath}) => {
+    const selectMenu = ({ item, key, keyPath }) => {
       // console.log(item)
       // console.log(key)
       // console.log(keyPath)
-      // console.log(localStorage.getItem("selectedKeys"))
-      // console.log(localStorage.getItem("openKeys"))
+      // // console.log(localStorage.getItem("selectedKeys"))
+      console.log(localStorage.getItem("openKeys"))
       dataItem.selectedKeys = key;
       // 保存到浏览器缓存
       localStorage.setItem("selectedKeys", key)
     }
     //展开/关闭菜单
     const openMenu = (openKeys) => {
+      console.log('2222222222222222',openKeys)
       dataItem.openKeys = openKeys;
       localStorage.setItem("openKeys", openKeys)
     }

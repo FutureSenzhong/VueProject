@@ -1,9 +1,26 @@
+const path = require("path")
+
 module.exports = {
     publicPath:process.env.NODE_ENV === "production" ? "" : "/",
     // 打包路径
     outputDir:process.env.NODE_ENV === "production" ? "dist" : "devdist",
     //语法检查开关
     lintOnSave: true,
+    //svg 图标配置
+    chainWebpack: config => {
+        // 删除默认处理svg规则
+        config.module.rules.delete("svg")
+        config.module
+            .rule("svg-sprite-loader").test(/\.svg$/)
+            .include
+            .add(path.resolve("./src/assets/svg"))
+            .end()
+            .use("svg-sprite-loader")
+            .loader("svg-sprite-loader")
+            .options({
+                symbolId: "icon-[name]"
+            })
+    },
     //样式文件配置
     css: {
         loaderOptions: {
